@@ -21,9 +21,9 @@ const Banner = () => {
         <div id="slide2" className="carousel-item relative w-full">
         <div id="slide1" className="carousel-item relative w-full">
         <div
-  className="hero md:h-[500px]"
+  className="hero min-h-screen "
   style={{
-    backgroundImage: "url(https://artistic-codezeel.myshopify.com/cdn/shop/files/main-banner-1_1903x650.jpg?v=1652420060;)",
+    backgroundImage: "url(https://russell-collection.com/wp-content/uploads/2024/10/what-is-acrylic-painting.jpg)",
   }}>
         
             <div> <h3 className='text-red-900'> thisis gad;fhidf</h3></div>
