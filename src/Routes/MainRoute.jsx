@@ -7,6 +7,9 @@ import AddItems from "../Pages/AddItems";
 import LogIn from "../Components/LogIn";
 import Register from "../Components/Register";
 import Contact from "../Components/Contact";
+import AllItems from "../Components/AllItems";
+import ArtDetails from "../Components/ArtDetails";
+import EditArt from "../Components/EditArt";
 
 
 
@@ -21,7 +24,7 @@ const MainRoute = createBrowserRouter([
         {
 path:'/', 
 element:<Home></Home>,
-loader: () => fetch('http://localhost:5000/craftItems')
+loader: () => fetch('http://localhost:5000/craftItems') 
         },
         {
           path:'/addItems',
@@ -40,8 +43,21 @@ loader: () => fetch('http://localhost:5000/craftItems')
           element:<Contact></Contact>
         }, 
         {
-          path:''
-        }
+          path:'/allItems',
+          element:<AllItems></AllItems>,
+          loader:() => fetch('http://localhost:5000/craftItems') 
+        },
+        {
+          path:'/artDetails/:id',
+          element:<ArtDetails></ArtDetails>,
+          loader:({params}) => fetch(`http://localhost:5000/craftItems/${params.id}`)
+
+        },
+       {
+         path:'/editArt/:id',
+         element:<EditArt></EditArt>,
+         loader:({params}) => fetch(`http://localhost:5000/craftItems/${params.id}`)
+       }
 
 
       ]

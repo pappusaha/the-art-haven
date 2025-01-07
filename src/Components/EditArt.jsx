@@ -1,8 +1,15 @@
 import React from 'react';
 import { useForm } from "react-hook-form"
+import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
-const AddItems = () => {
+const EditArt = () => {
+    const updateLoadData = useLoaderData();
+ 
+ 
+ 
+    const {_id, email, userName, imageURL, itemName, subCategoryType, processingTime, price, rating, customization, stockStatus, message } = updateLoadData;
+
     const {
         register,
         handleSubmit,
@@ -12,8 +19,8 @@ const AddItems = () => {
 
       const onSubmit = (data) => {
 console.log(data)
-        fetch('http://localhost:5000/craftItems',{
-method:'POST',
+        fetch(`http://localhost:5000/craftItems/${_id}`,{
+method:'PUT',
 headers:{
     'content-type':'application/json'
 },
@@ -24,7 +31,7 @@ body: JSON.stringify(data)
         .then(res => res.json())
         .then(data => {
             console.log(data)
-if(data.insertedId){
+if(data.modifiedCount>0){
    
     Swal.fire({
         title: 'success!',
@@ -33,7 +40,27 @@ if(data.insertedId){
         confirmButtonText: 'Cool'
       })
 }
+else if(data.modifiedCount===0){
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "This is no change!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+}
 
+        })
+        .catch((error) => {
+            console.error(error)
+        
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong ",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+           
+          
         })
       }
 
@@ -65,12 +92,14 @@ if(data.insertedId){
                                     placeholder="Item Name"
                                     name='itemName'
                                     className="border-2 p-3 bg-slate-100 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                    defaultValue="test" {...register("itemName",{ required: true }) }
+                                    defaultValue={itemName}
+ {...register("itemName",{ required: true }) }
                                 />
                             </div>
                             <div className="flex flex-col">
                                 <label
                                     htmlFor="subCategoryType"
+                                    defaultValue={subCategoryType}
                                     className="font-semibold text-lg mb-2 text-teal-700"
                                 >
                                     Subcategory
@@ -78,6 +107,7 @@ if(data.insertedId){
                                 <select
                                     id="subCategoryType"
                                     name="subCategoryType"
+                                    defaultValue={subCategoryType}
                                     {...register("subCategoryType",{ required: true }) }
                                     className="p-3 border-2 bg-slate-100 rounded-md focus:ring-2 focus:ring-teal-500"
                                 >
@@ -102,6 +132,7 @@ if(data.insertedId){
                                     type="email"
                                     name='email'
                                     {...register("email",{ required: true }) }
+                                    defaultValue={email}
                                     placeholder="example@gmail.com"
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
                                 />
@@ -117,6 +148,7 @@ if(data.insertedId){
                                     type="text"
                                     placeholder="User Name"
                                     name='userName'
+                                    defaultValue={userName}
                                     {...register("userName",{ required: true }) }
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
                                 />
@@ -131,6 +163,7 @@ if(data.insertedId){
                                 <input
                                     type="text"
                                     name='processingTime'
+                                    defaultValue={processingTime}
                                     placeholder="Processing Time"
                                     {...register("processingTime",{ required: true}) }
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
@@ -150,6 +183,7 @@ if(data.insertedId){
                                 <input
                                     type="number"
                                     placeholder="Price"
+                                    defaultValue={price}
                                     {...register("price",{ required: true}) }
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
                                 />
@@ -164,6 +198,7 @@ if(data.insertedId){
                                 <input
                                     type="number"
                                     placeholder="Rating"
+                                    defaultValue={rating}
                                     {...register("rating",{ required: true}) }
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
                                 />
@@ -179,6 +214,7 @@ if(data.insertedId){
                                     type="text"
                                     placeholder="Image URL"
                                     name='imageURL'
+                                    defaultValue={imageURL}
                                     {...register("imageURL",{ required: true}) }
                                     className="w-full bg-slate-100 rounded-md border-2 p-3 focus:ring-2 focus:ring-teal-500"
                                 />
@@ -194,6 +230,7 @@ if(data.insertedId){
                                 <select
                                     id="customization"
                                     name="customization"
+                                    defaultValue={customization}
                                     {...register("customization",{ required: true}) }
                                     className="p-3 bg-slate-100 border-2 rounded-md focus:ring-2 focus:ring-teal-500"
                                 >
@@ -211,6 +248,7 @@ if(data.insertedId){
                                 <select
                                     id="stockStatus"
                                     name="stockStatus"
+                                    defaultValue={stockStatus}
                                     {...register("stockStatus",{ required: true}) }
                                     className="p-3 bg-slate-100 border-2 rounded-md focus:ring-2 focus:ring-teal-500"
                                 >
@@ -225,6 +263,7 @@ if(data.insertedId){
                         <label htmlFor="message" className="font-semibold text-lg mb-2 text-teal-700">Short Description</label>
                         <textarea
                             name="message"
+                            defaultValue={message}
                             {...register("message",{ required: true}) }
                             className='w-full bg-slate-200 rounded-md p-3 border-2 focus:ring-2 focus:ring-teal-500'
                             placeholder="The cat was playing in the garden."
@@ -232,7 +271,7 @@ if(data.insertedId){
                     </div>
                     <input
                         type="submit"
-                        value="Add Items"
+                        value="Update ART&Craft Items"
                         className='w-full mt-6 bg-gradient-to-r from-teal-500 to-sky-600 text-white py-3 rounded-md font-bold hover:opacity-90 cursor-pointer'
                     />
                 </form>
@@ -241,4 +280,4 @@ if(data.insertedId){
     );
 };
 
-export default AddItems;
+export default EditArt;

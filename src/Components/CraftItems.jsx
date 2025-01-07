@@ -1,18 +1,34 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const CraftItems = ({items}) => {
-    const {itemName,subCategoryType,email,userName,processingTime,price,rating,imageURL,customization,stockStatus,message}=items
+    const {itemName,subCategoryType,email,userName,processingTime,price,rating,imageURL,customization,stockStatus,message,_id}=items
+   
     return (
-        <div>
-           <div className="max-w-xs p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
-	<img src={imageURL} alt="" className="object-cover object-center w-full rounded-md h-72 bg-gray-500" />
-	<div className="mt-6 mb-2">
-		<span className="block text-xs font-medium tracking-widest uppercase text-violet-400">Quisque</span>
-		<h2 className="text-xl font-semibold tracking-wide">{itemName}</h2>
-	</div>
-	<p className="text-gray-100">Mauris et lorem at elit tristique dignissim et ullamcorper elit. In sed feugiat mi. Etiam ut lacinia dui.</p>
-</div>
+    
+
+<section>
+<div className="card  w-96 shadow-xl bg-slate-100">
+        <figure className="px-10 pt-10">
+          <img
+            src={imageURL}
+            alt="Shoes"
+            className="rounded-xl" />
+        </figure>
+        <div className="card-body items-center text-center">
+          <h2 className="card-title">{itemName}</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div className="card-actions">
+           <NavLink to={`/artDetails/${_id}`}   className="bg-cyan-700 text-white px-6 py-2 rounded-md font-medium    cursor-grab transition  ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500  duration-300" > View Details</NavLink>
+          
+          </div>
         </div>
+      </div>
+<div>
+    
+</div>
+</section>
+
     );
 };
 

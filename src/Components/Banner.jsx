@@ -23,7 +23,7 @@ const Banner = () => {
         <div
   className="hero min-h-screen "
   style={{
-    backgroundImage: "url(https://russell-collection.com/wp-content/uploads/2024/10/what-is-acrylic-painting.jpg)",
+    backgroundImage: "url(https://i.postimg.cc/QdP8FqyN/DALL-E-2025-01-06-22-32-41-A-visually-stunning-and-creative-digital-painting-of-a-vibrant-art-stud.webp)",
   }}>
         
             <div> <h3 className='text-red-900'> thisis gad;fhidf</h3></div>
@@ -64,7 +64,7 @@ const Banner = () => {
         <div
   className="hero min-h-screen  bg-center"
   style={{
-    backgroundImage: "url(https://wdtregalia.wpengine.com/wp-content/uploads/2024/04/Hotspot-img-5-h2-1536x794.jpg)",
+    backgroundImage: "url(https://i.postimg.cc/xdSZpJky/DALL-E-2025-01-06-22-36-07-A-hand-made-style-innovative-painting-featuring-an-imaginative-blend-of.webp)",
   }}>
         
             <div> <h3 className='text-red-900'> thisis coradjfkajdkf</h3></div>

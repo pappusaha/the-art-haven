@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from '../Components/Banner';
 import Marquee from "react-fast-marquee";
 import Footer from '../Components/Footer';
@@ -12,6 +12,10 @@ import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
   const craftItems=useLoaderData()
+  const [artItems, setArtItems]=useState(craftItems)
+  const[showAllItems, setAllItems]=useState(false)
+
+  const displayItems= showAllItems ? artItems : artItems.slice(0,6)
     return (
         <div className='bg-slate-50'>
           
@@ -31,14 +35,35 @@ const Home = () => {
       </div>
      
     </div>
-    <Category></Category>
-    {
-      craftItems.map(items => <CraftItems key={items._id} items={items}></CraftItems> )
+   <div className='max-w-6xl mx-auto'>
+   <Category></Category>
+   <div className=' pt-20 border-t-2 my-28'>
+    <p className='text-xl'>Our New art</p>
+<h2 className='text-5xl'>Explore our new Art</h2>
+    
+   <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 my-28 '>
+   {
+      displayItems.map(items => <CraftItems key={items._id} items={items}></CraftItems> )
     }
+
+
+   </div>
+   <div >
+ {
+  artItems.length>6 &&(
+<button className="px-8 py-2 rounded-md bg-yellow-200 text-white font-bold hover:bg-cyan-600 transition duration-300" onClick={ () => setAllItems(!showAllItems)}>
+  { showAllItems ? 'show Less ' : 'show all'}
+</button>
+
+  )
+ }
+   </div>
+   </div>
    
     <Gallery></Gallery>
     <Artist></Artist>
     <Content></Content>
+   </div>
     <Newsletter></Newsletter>
     <Footer></Footer>
         </div>
