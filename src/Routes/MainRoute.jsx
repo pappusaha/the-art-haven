@@ -5,11 +5,12 @@ import NotFound from "../NotFoundPage/NotFound";
 import MainLayouts from "../Layouts/MainLayouts";
 import AddItems from "../Pages/AddItems";
 import LogIn from "../Components/LogIn";
-import Register from "../Components/Register";
+import RegistrationPage from "../Components/RegistrationPage";
 import Contact from "../Components/Contact";
 import AllItems from "../Components/AllItems";
 import ArtDetails from "../Components/ArtDetails";
 import EditArt from "../Components/EditArt";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 
 
@@ -28,15 +29,19 @@ loader: () => fetch('http://localhost:5000/craftItems')
         },
         {
           path:'/addItems',
-          element:<AddItems></AddItems>,
+          element: (
+            <ProtectedRoute>
+              <AddItems></AddItems>,
+            </ProtectedRoute>
+          ),
         },
         {
-          path:'/logIn',
+          path:'/login',
           element:<LogIn></LogIn>
         },
         {
-          path:'/register',
-          element:<Register></Register>
+          path:'/registrationPage',
+          element:<RegistrationPage></RegistrationPage>
         },
         {
           path:'/contact',
@@ -44,12 +49,16 @@ loader: () => fetch('http://localhost:5000/craftItems')
         }, 
         {
           path:'/allItems',
-          element:<AllItems></AllItems>,
+          element:   <AllItems></AllItems>,
           loader:() => fetch('http://localhost:5000/craftItems') 
         },
         {
           path:'/artDetails/:id',
-          element:<ArtDetails></ArtDetails>,
+          element:(<ProtectedRoute>
+            <ArtDetails></ArtDetails>
+          </ProtectedRoute>
+
+          ),
           loader:({params}) => fetch(`http://localhost:5000/craftItems/${params.id}`)
 
         },

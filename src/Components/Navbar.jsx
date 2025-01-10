@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import UseAuth from '../Hooks/UseAuth';
 
 const Navbar = () => {
 
@@ -11,6 +12,7 @@ const Navbar = () => {
  <li>   <NavLink to={'/Contact'} className={'text-gray-800 hover:text-amber-600'}>  Contact us </NavLink></li>
   
   </>
+  const{user,logout}=UseAuth()
   return (
   <section className='bg-sky-100  bg-opacity-50 shadow-lg  fixed top-0 left-0 right-0 z-50 '>
 <div className="navbar bg-opacity-05 static w-11/12 mx-auto  ">
@@ -79,7 +81,10 @@ const Navbar = () => {
       </div>
   
       {/* Profile Dropdown */}
-      <div className="dropdown dropdown-end">
+
+      {
+        user ?(
+          <div className="dropdown dropdown-end">
         <button
           tabIndex={0}
           aria-label="Open profile menu"
@@ -88,7 +93,7 @@ const Navbar = () => {
           <div className="w-10 rounded-full">
             <img
               alt="User avatar"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              src={user.photoURL || 'https://www.shutterstock.com/shutterstock/photos/2069253944/display_1500/stock-vector-female-cartoon-character-no-face-vector-illustration-2069253944.jpg'}
             />
           </div>
         </button>
@@ -97,13 +102,25 @@ const Navbar = () => {
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
         >
           <li>
-            <a href="/">Profile</a>
+            <a href="/">{user.displayName
+            }</a>
           </li>
           <li>
-            <a href="/">Logout</a>
+            <a href="/"><button onClick={() =>logout()} className='btn btn-sm btn-ghost'>
+            LogOut
+              </button></a>
           </li>
         </ul>
       </div>
+        ) : (
+          <NavLink to={'/login'} className={ 'bg-sky-300 py-1 px-3 rounded-lg text-amber-400 font-bold outline outline-offset-2 outline-1 ... '}>      
+     <button >
+      Login 
+     </button></NavLink>
+        )
+      }
+ 
+    
     </div>
   </div>
   </section>

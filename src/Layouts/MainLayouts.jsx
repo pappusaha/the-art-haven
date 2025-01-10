@@ -8,6 +8,7 @@ const MainLayouts = () => {
         <div className='bg-slate-50'>
             <Navbar> </Navbar>
             <Outlet></Outlet>
+            <Footer></Footer>
             
         </div>
     );

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import MainRoute from './Routes/MainRoute'
+import AuthProvider from './AuthProvider/AuthProvider'
 
 
 
@@ -10,6 +11,8 @@ import MainRoute from './Routes/MainRoute'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-     <RouterProvider router={MainRoute} />
+  <AuthProvider>
+  <RouterProvider router={MainRoute} />
+  </AuthProvider>
   </StrictMode>,
 )

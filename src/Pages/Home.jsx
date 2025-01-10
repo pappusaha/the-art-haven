@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Banner from '../Components/Banner';
 import Marquee from "react-fast-marquee";
-import Footer from '../Components/Footer';
+
 import Category from '../Components/Category';
 import Gallery from '../Components/Gallery';
 import Artist from '../Components/Artist';
@@ -65,7 +65,7 @@ const Home = () => {
     <Content></Content>
    </div>
     <Newsletter></Newsletter>
-    <Footer></Footer>
+   
         </div>
     );
 };
