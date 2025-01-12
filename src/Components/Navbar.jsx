@@ -106,7 +106,7 @@ const Navbar = () => {
             }</a>
           </li>
           <li>
-            <a href="/"><button onClick={() =>logout()} className='btn btn-sm btn-ghost'>
+            <a href="/"><button onClick={()=>logout()} className='btn btn-sm btn-ghost'>
             LogOut
               </button></a>
           </li>

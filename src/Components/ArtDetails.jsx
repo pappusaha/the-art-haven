@@ -26,7 +26,7 @@ Swal.fire({
   confirmButtonText: "Yes, delete it!"
 }).then((result) => {
   if (result.isConfirmed) {
-   fetch(`http://localhost:5000/craftItems/${id}`,
+   fetch(`https://canvas-strokes-sever-side-mkxfl3gny-pappusahas-projects.vercel.app/${id}`,
     {
         method:'DELETE',
     }

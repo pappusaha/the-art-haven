@@ -21,10 +21,10 @@ const signUpUser=(email,password) => {
 
 }
 const logout =()=> {
-   
+    setUser('')
     signOut(auth)
 console.log('pappus')
-    setUser('')
+  
    
    
 }
@@ -41,7 +41,7 @@ useEffect(()=> {
 return ()=>unsubscribe()
 
 
-},[user])
+},[])
 
 // update a profile 
 

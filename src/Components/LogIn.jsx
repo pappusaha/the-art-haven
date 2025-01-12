@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import UseAuth from "../Hooks/UseAuth";
+import Swal from 'sweetalert2'
 
 
 const LogIn=() =>{
@@ -9,7 +10,10 @@ const LogIn=() =>{
   const {signIn,goggleLogin,facebookLogIn}=UseAuth()
     const { register, handleSubmit,formState:{ errors }} = useForm()
   
-
+const location=useLocation()
+const navigate=useNavigate()
+console.log(location.state)
+const form = location?.state || '/'
     const onSubmit = (data) => {
       console.log(data)
       const {email, password}=data
@@ -37,6 +41,29 @@ const LogIn=() =>{
     setPasswordVisible(!passwordVisible);
   };
 
+  const handleSocialLogin=(socialLogin)=> {
+    socialLogin()
+    .then(result => {
+      if(result.user) {
+        Swal.fire({
+          title:"your login is succsessfull",
+          position: "top",
+          width:'500px',
+          height:'20px'
+        });
+navigate(form)
+      }
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "something is missing try again.",
+          icon: "warning"
+        });
+      }
+    });
+  }
   return (
     <div className="flex h-screen bg-gray-100 items-center justify-center overflow-hidden relative">
       {/* Background Image */}
@@ -93,14 +120,14 @@ const LogIn=() =>{
 
           {/* Social Login Buttons */}
           <div className="flex justify-between mb-4">
-            <button onClick={() => goggleLogin()}
+            <button onClick={() => handleSocialLogin(goggleLogin)}
               type="button"
               className="w-full mr-2 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
             >
               Google
             </button>
             <button
-            onClick={() => facebookLogIn()}
+            onClick={() => handleSocialLogin (facebookLogIn)}
               type="button"
               className="w-full ml-2 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >

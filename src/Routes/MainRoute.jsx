@@ -11,6 +11,7 @@ import AllItems from "../Components/AllItems";
 import ArtDetails from "../Components/ArtDetails";
 import EditArt from "../Components/EditArt";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import MyCreations from "../Pages/Mycreations";
 
 
 
@@ -59,13 +60,19 @@ loader: () => fetch('http://localhost:5000/craftItems')
           </ProtectedRoute>
 
           ),
-          loader:({params}) => fetch(`http://localhost:5000/craftItems/${params.id}`)
+          loader:({params}) => fetch(`https://canvas-strokes-sever-side-mkxfl3gny-pappusahas-projects.vercel.app/${params.id}`)
 
         },
        {
          path:'/editArt/:id',
          element:<EditArt></EditArt>,
-         loader:({params}) => fetch(`http://localhost:5000/craftItems/${params.id}`)
+         loader:({params}) => fetch(`https://canvas-strokes-sever-side-mkxfl3gny-pappusahas-projects.vercel.app/${params.id}`)
+       }, 
+       {
+        path:'/MyCreations',
+        element:(<ProtectedRoute>
+          <MyCreations></MyCreations>
+        </ProtectedRoute>)
        }
 
 

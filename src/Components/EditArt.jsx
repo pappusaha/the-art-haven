@@ -19,7 +19,7 @@ const EditArt = () => {
 
       const onSubmit = (data) => {
 console.log(data)
-        fetch(`http://localhost:5000/craftItems/${_id}`,{
+        fetch(`https://canvas-strokes-sever-side-mkxfl3gny-pappusahas-projects.vercel.app/${_id}`,{
 method:'PUT',
 headers:{
     'content-type':'application/json'
